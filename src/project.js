@@ -1992,13 +1992,18 @@ window.__require = function e(t, n, o) {
           null != n.Instance && n.Instance.destroy(), n.Instance = this
         }, t.prototype.start = function () {
           var e = this;
-          this.ShowScorePanel(), s.default.Instance.GetLevel() % 5 == 1 ? (this.passlevelYQ = .12, this.lerpCtrl = !0) : s.default.Instance.GetLevel() % 5 == 2 ? (this.passlevelYQ = .31, this.lerpCtrl = !0) : s.default.Instance.GetLevel() % 5 == 3 ? (this.passlevelYQ = .51, this.lerpCtrl = !0) : s.default.Instance.GetLevel() % 5 == 4 ? (this.passlevelYQ = .71, this.lerpCtrl = !0) : s.default.Instance.GetLevel() % 5 == 0 && (this.passlevelYQ = 1, this.lerpCtrl = !0), cc.tween(this.adsButton).call(function () {
-            e.adsButton.children[0].getComponent(cc.Sprite).spriteFrame = u.default.Instance.adsbutton[0]
-          }).delay(.5).call(function () {
-            e.adsButton.children[0].getComponent(cc.Sprite).spriteFrame = u.default.Instance.adsbutton[1]
-          }).delay(.5).union().repeatForever().start()
+          this.ShowScorePanel(), s.default.Instance.GetLevel() % 5 == 1 ? (this.passlevelYQ = .12, this.lerpCtrl = !0) : s.default.Instance.GetLevel() % 5 == 2 ? (this.passlevelYQ = .31, this.lerpCtrl = !0) : s.default.Instance.GetLevel() % 5 == 3 ? (this.passlevelYQ = .51, this.lerpCtrl = !0) : s.default.Instance.GetLevel() % 5 == 4 ? (this.passlevelYQ = .71, this.lerpCtrl = !0) : s.default.Instance.GetLevel() % 5 == 0 && (this.passlevelYQ = 1, this.lerpCtrl = !0), this.setAdsIconFrame(u.default.Instance.adsbutton[1])
         }, t.prototype.update = function (e) {
           this.UpdateScoreLabel(e), this.lerpCtrl && this.lerpNumFunc(this.passlevelYQ), this.levelPanel.children[1].getComponent(cc.Label).string = s.default.Instance.GetLevel().toString()
+        }, t.prototype.setAdsIconFrame = function (frame) {
+          var icon = this.adsButton.children[0];
+          var sprite = icon.getComponent(cc.Sprite);
+          sprite.sizeMode = cc.Sprite.SizeMode.CUSTOM;
+          sprite.spriteFrame = frame;
+          var rect = frame.getRect();
+          var scale = Math.min(139 / rect.width, 133 / rect.height);
+          icon.setContentSize(rect.width * scale, rect.height * scale);
+          icon.setPosition(0, 0);
         }, t.prototype.adsButtonFunc = function () {
           if (clickChangeFruit) {
             if(gameFunction.default.Instance.targetFruit) {
